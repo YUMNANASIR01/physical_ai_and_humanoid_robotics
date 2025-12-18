@@ -5,8 +5,8 @@ import { AuthContext } from '@site/src/components/AuthContext';
 import { getSharedOriginalContent, setSharedOriginalContent } from './TranslationControl';
 import styles from './ContentControls.module.css';
 
-const API_URL = 'https://ai-rative-book-backend-production.up.railway.app';
-const API_KEY = 'fwnelrjrl2ur08d9s0fsdhf90324h30493';
+const API_URL = 'web-production-94365f.up.railway.app';
+const API_KEY = 'backend1234'
 
 // Cache for personalized content per page + user background
 const personalizationCache = new Map<string, string>();
