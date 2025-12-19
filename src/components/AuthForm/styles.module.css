@@ -1,7 +1,7 @@
 /* src/components/AuthForm/styles.module.css */
 .wrapper {
   padding: 40px 20px;
-  background-color: var(--ifm-background-color);
+  /* Removed background-color to let the body's gradient show through */
   z-index: 10;
   display: flex;
   justify-content: center;
@@ -12,27 +12,35 @@
 
 .card {
   width: 100%;
-  max-width: 480px;
-  background: var(--ifm-card-background-color);
+  max-width: 520px; /* Slightly wider card for better layout */
+  background: rgba(0, 0, 0, 0.4); /* Dark translucent background for glassmorphism */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--ifm-card-border-color);
+  border-radius: 16px; /* Already good */
+  border: 1px solid var(--glass-border-color); /* Subtle, translucent border */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Softer, more diffused shadow */
   box-sizing: border-box;
+  color: var(--ifm-font-color-base); /* Ensure text color is light */
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 2.2rem; /* Slightly larger title */
   font-weight: 700;
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 30px; /* More space below title */
   color: var(--ifm-heading-color);
+  background: linear-gradient(90deg, var(--ai-accent-blue), var(--ai-accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
 }
 
 .card form {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Spacing between form elements */
+  gap: 18px; /* Increased spacing between form elements */
 }
 
 .card input[type="text"],
@@ -40,64 +48,73 @@
 .card input[type="password"],
 .card select {
   width: 100%;
-  padding: 12px 14px;
-  font-size: 1rem;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 8px;
-  background-color: var(--ifm-background-surface-color);
-  color: var(--ifm-font-color-base);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  padding: 14px 16px; /* Increased padding */
+  font-size: 1.05rem; /* Slightly larger font */
+  border: 1px solid var(--ifm-color-emphasis-300); /* Darker border */
+  border-radius: 10px; /* Slightly more rounded corners */
+  background-color: rgba(255, 255, 255, 0.1); /* Translucent background for inputs */
+  color: var(--ifm-font-color-base); /* Light text color */
+  transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
   box-sizing: border-box;
-  -webkit-appearance: none; /* Remove default styling for inputs */
+  -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+
+.card input::placeholder {
+  color: var(--ifm-font-color-secondary); /* Lighter placeholder color */
+  opacity: 0.7; /* Make it a bit translucent */
 }
 
 .card input:focus,
 .card select:focus {
   outline: none;
-  border-color: var(--ifm-color-primary);
-  box-shadow: 0 0 0 3px rgba(var(--ifm-color-primary-rgb), 0.15);
+  border-color: var(--ifm-color-primary); /* Primary accent color on focus */
+  box-shadow: 0 0 0 4px rgba(var(--ifm-color-primary-rgb), 0.3); /* Softer, wider glow */
+  background-color: rgba(255, 255, 255, 0.15); /* Slightly lighter on focus */
 }
 
 .card select {
-  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-6.5%200-12.3%203.2-16.1%208.1-3.9%204.9-4.3%2011.6-1.1%2017.4l139.5%20182c1.7%202.6%204.9%204.2%208.4%204.2%203.5%200%206.7-1.6%208.4-4.2l139.5-182c3.2-5.8%202.8-12.5-1.1-17.4z%22%2F%3E%3C%2Fsvg%3E');
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23c0c0c0%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-6.5%200-12.3%203.2-16.1%208.1-3.9%204.9-4.3%2011.6-1.1%2017.4l139.5%20182c1.7%202.6%204.9%204.2%208.4%204.2%203.5%200%206.7-1.6%208.4-4.2l139.5-182c3.2-5.8%202.8-12.5-1.1-17.4z%22%2F%3E%3C%2Fsvg%3E'); /* Updated arrow color */
   background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
+  background-position: right 15px center; /* Adjusted position */
+  background-size: 14px; /* Slightly larger arrow */
 }
 
 .card button {
   width: 100%;
-  padding: 14px;
-  font-size: 1.05rem;
+  padding: 16px; /* More prominent button */
+  font-size: 1.1rem;
   font-weight: 700;
   border: none;
-  border-radius: 8px;
-  background-color: var(--ifm-color-primary);
+  border-radius: 10px; /* Consistent rounded corners */
+  background: linear-gradient(90deg, var(--ai-accent-blue) 0%, var(--ifm-color-primary-dark) 100%); /* Gradient button */
   color: white;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
+  transition: all 0.3s ease;
   box-sizing: border-box;
+  box-shadow: 0 4px 15px rgba(var(--ai-accent-blue-rgb), 0.4); /* Soft button shadow */
 }
 
 .card button:hover:not(:disabled) {
-  background-color: var(--ifm-color-primary-dark);
-  transform: translateY(-2px);
+  background: linear-gradient(90deg, var(--ai-accent-purple) 0%, var(--ai-accent-blue) 100%); /* Gradient hover */
+  transform: translateY(-2px) scale(1.01); /* Subtle lift and scale */
+  box-shadow: 0 6px 20px rgba(var(--ai-accent-purple-rgb), 0.5); /* More prominent shadow on hover */
 }
 
 .card button:disabled {
   background-color: var(--ifm-color-emphasis-400);
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .error {
-  color: #d84a4a;
-  background-color: #ffebeb;
-  border: 1px solid #d84a4a;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  color: #ff6b6b; /* Softer error red */
+  background-color: rgba(255, 107, 107, 0.1); /* Translucent error background */
+  border: 1px solid #ff6b6b;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
   text-align: center;
   font-weight: 500;
   font-size: 0.95rem;
@@ -106,35 +123,31 @@
 .checkboxGroup {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  gap: 12px; /* Adjusted gap */
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 .checkboxGroup label {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.95rem;
+  gap: 8px; /* Adjusted gap */
+  font-size: 1rem; /* Slightly larger font */
   color: var(--ifm-font-color-base);
   cursor: pointer;
 }
 
 .checkboxGroup input[type="checkbox"] {
-  /* Remove custom styling that conflicts with default checkbox appearance */
-  width: auto;
-  height: auto;
-  padding: 0;
-  margin: 0;
-  vertical-align: middle;
-  transform: scale(1.1);
+  width: 18px; /* Standardized size */
+  height: 18px;
+  accent-color: var(--ifm-color-primary); /* Use primary color for checkbox */
   border-radius: 4px;
 }
 
 .switch {
-  margin-top: 20px;
+  margin-top: 25px; /* More space above switch link */
   text-align: center;
-  font-size: 0.95rem;
+  font-size: 1rem; /* Slightly larger font */
   color: var(--ifm-font-color-secondary);
 }
 
@@ -142,30 +155,75 @@
   color: var(--ifm-color-primary);
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.2s;
 }
 
 .switch a:hover {
+  color: var(--ai-accent-purple); /* Accent color on hover */
   text-decoration: underline;
 }
 
-/* Responsive Styles */
+/* Responsive Styles - Adjusted for new sizes and spacing */
 @media (min-width: 1200px) {
   .card {
-    max-width: 550px;
+    max-width: 580px; /* Allow card to be a bit wider on large screens */
   }
 }
 
 @media (max-width: 768px) {
   .wrapper {
-    padding: 20px 10px;
-    align-items: flex-start;
+    padding: 25px 15px;
+    align-items: center; /* Center on smaller screens as well */
   }
   .card {
-    padding: 25px;
+    padding: 30px;
+    margin-top: 0; /* Remove top margin on smaller screens */
+    border-radius: 14px;
+  }
+  .title {
+    font-size: 2rem;
+    margin-bottom: 25px;
+  }
+  .card form {
+    gap: 15px;
+  }
+  .card input,
+  .card select,
+  .card button {
+    padding: 13px 15px;
+    font-size: 1rem;
+    border-radius: 9px;
+  }
+  .checkboxGroup {
+    gap: 10px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+  }
+  .checkboxGroup label {
+    font-size: 0.95rem;
+  }
+  .error {
+    padding: 10px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+  }
+  .switch {
     margin-top: 20px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 20px 10px;
+  }
+  .card {
+    padding: 20px;
+    border-radius: 12px;
   }
   .title {
     font-size: 1.8rem;
+    margin-bottom: 20px;
   }
   .card form {
     gap: 12px;
@@ -173,69 +231,53 @@
   .card input,
   .card select,
   .card button {
-    padding: 11px 12px;
+    padding: 12px 14px;
     font-size: 0.95rem;
-  }
-  .checkboxGroup label {
-    font-size: 0.9rem;
-  }
-  .error, .switch {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .wrapper {
-    padding: 15px 10px;
-  }
-  .card {
-    padding: 20px;
-    border-radius: 12px;
-  }
-  .title {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-  .card form {
-    gap: 10px;
-  }
-  .card input,
-  .card select,
-  .card button {
-    padding: 10px;
-    font-size: 0.9rem;
+    border-radius: 8px;
   }
   .checkboxGroup {
     gap: 8px;
+    margin-top: 6px;
+    margin-bottom: 10px;
   }
   .checkboxGroup label {
+    font-size: 0.9rem;
+  }
+  .error {
+    padding: 8px;
+    margin-bottom: 10px;
     font-size: 0.85rem;
   }
-  .error, .switch {
-    font-size: 0.85rem;
+  .switch {
+    margin-top: 18px;
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 360px) {
   .wrapper {
-    padding: 10px 5px;
+    padding: 15px 8px;
   }
   .card {
     padding: 15px;
   }
   .title {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
   }
   .card input,
   .card select,
   .card button {
-    padding: 8px;
-    font-size: 0.8rem;
+    padding: 10px 12px;
+    font-size: 0.9rem;
   }
   .checkboxGroup label {
+    font-size: 0.85rem;
+  }
+  .error {
     font-size: 0.8rem;
   }
-  .error, .switch {
-    font-size: 0.8rem;
+  .switch {
+    font-size: 0.85rem;
   }
 }

@@ -31,14 +31,35 @@
   /* Fonts */
   --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
   --ifm-heading-font-weight: 700;
+
+  /* Custom Accent Colors for AI/Robotics Theme */
+  --ai-accent-blue: #00bcd4; /* Cyan-like blue */
+  --ai-accent-purple: #9c27b0; /* Deep purple */
+  --ai-gradient-start: #0a192f; /* Dark blue almost black */
+  --ai-gradient-end: #1a0a2f; /* Dark purple almost black */
+  --glass-border-color: rgba(255, 255, 255, 0.1); /* Subtle white for glass border */
 }
 
+/* Dark Theme Overrides for AI/Robotics Aesthetic */
 [data-theme='dark'] {
-  --ifm-color-primary: #3b82f6;
-  --ifm-background-color: #0f172a; /* Slate Dark */
-  --ifm-background-surface-color: #1e293b;
-  --ifm-navbar-background-color: rgba(15, 23, 42, 0.8);
+  --ifm-color-primary: #00bcd4; /* Use AI accent blue as primary */
+  --ifm-background-color: #0d0d1e; /* Even darker background */
+  --ifm-background-surface-color: #1a1a2e; /* Darker surface for contrast */
+  --ifm-navbar-background-color: rgba(13, 13, 30, 0.8); /* Transparent dark for navbar */
+  --ifm-heading-color: #e0e0e0;
+  --ifm-font-color-base: #c0c0c0;
+  --ifm-font-color-secondary: #a0a0a0;
+  --ifm-color-emphasis-300: #3a3a4e; /* Darker border for inputs */
+  --ifm-color-emphasis-400: #5a5a7e; /* Darker disabled button */
+  --ifm-color-primary-dark: #008ba3; /* Darker primary for hover */
+  --ifm-color-primary-darker: #006073;
+
+  /* Apply dark gradient to body */
+  body {
+    background: linear-gradient(135deg, var(--ai-gradient-start) 0%, var(--ai-gradient-end) 100%) fixed;
+  }
 }
+
 
 /* NAVBAR - Glass Effect */
 .navbar {
