@@ -1,4 +1,4 @@
-
+// src\pages\signup.tsx
 import React from 'react';
 import Layout from '@theme/Layout';
 import AuthForm from '@site/src/components/AuthForm';

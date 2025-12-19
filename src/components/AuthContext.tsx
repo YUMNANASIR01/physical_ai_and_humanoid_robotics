@@ -3,9 +3,10 @@ import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import useIsBrowser from '@docusaurus/useIsBrowser';
 import { JSX } from 'react/jsx-runtime';
 
+import { API_ENDPOINT } from '../config';
+
 // API Configuration
-const API_URL = 'https://web-production-94365f.up.railway.app';
-const API_KEY = 'backend1234';
+const API_URL = API_ENDPOINT;
 
 
 
@@ -57,6 +58,7 @@ interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  error: string | null;
   login: (email: string, password: string) => Promise<void>;
   signup: (email: string, password: string, name: string, background: UserBackground) => Promise<void>;
   logout: () => void;
@@ -67,6 +69,7 @@ export const AuthContext = createContext<AuthContextType>({
   user: null,
   isAuthenticated: false,
   isLoading: true,
+  error: null,
   login: async () => {},
   signup: async () => {},
   logout: () => {},
@@ -80,6 +83,7 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null); // New error state
   const [sessionToken, setSessionToken] = useState<string | null>(null);
   const isBrowser = useIsBrowser();
 
@@ -98,8 +102,10 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   }, [isBrowser]);
 
   const login = async (email: string, password: string) => {
+    setIsLoading(true);
+    setError(null); // Clear previous errors
     try {
-      const response = await fetchWithTimeout(`${API_URL}/auth/signin`, {
+      const response = await fetchWithTimeout(`${API_URL}/api/auth/signin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -108,8 +114,8 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
       if (!response.ok) {
         let errorMessage = 'Login failed';
         try {
-          const error = await response.json();
-          errorMessage = error.detail || error.message || errorMessage;
+          const errorData = await response.json();
+          errorMessage = errorData.detail || errorData.message || errorMessage;
         } catch {
           errorMessage = `Login failed (${response.status})`;
         }
@@ -125,15 +131,20 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
         localStorage.setItem('physicalai_session_token', data.session_token);
         localStorage.setItem('physicalai_user', JSON.stringify(data.user));
       }
-    } catch (error) {
-      console.error('Login error:', error);
-      throw error;
+    } catch (err: any) {
+      console.error('Login error:', err);
+      setError(err.message);
+      throw err; // Re-throw to propagate to AuthForm
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const signup = async (email: string, password: string, name: string, background: UserBackground) => {
+    setIsLoading(true);
+    setError(null); // Clear previous errors
     try {
-      const response = await fetchWithTimeout(`${API_URL}/auth/signup`, {
+      const response = await fetchWithTimeout(`${API_URL}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, name, background }),
@@ -142,8 +153,8 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
       if (!response.ok) {
         let errorMessage = 'Signup failed';
         try {
-          const error = await response.json();
-          errorMessage = error.detail || error.message || errorMessage;
+          const errorData = await response.json();
+          errorMessage = errorData.detail || errorData.message || errorMessage;
         } catch {
           errorMessage = `Signup failed (${response.status})`;
         }
@@ -159,21 +170,26 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
         localStorage.setItem('physicalai_session_token', data.session_token);
         localStorage.setItem('physicalai_user', JSON.stringify(data.user));
       }
-    } catch (error) {
-      console.error('Signup error:', error);
-      throw error;
+    } catch (err: any) {
+      console.error('Signup error:', err);
+      setError(err.message);
+      throw err; // Re-throw to propagate to AuthForm
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const logout = async () => {
+    setError(null); // Clear previous errors
     try {
       if (sessionToken) {
-        await fetchWithTimeout(`${API_URL}/auth/signout?session_token=${sessionToken}`, {
+        await fetchWithTimeout(`${API_URL}/api/auth/signout?session_token=${sessionToken}`, {
           method: 'POST',
         }, 10000); // Shorter timeout for logout
       }
-    } catch (error) {
-      console.error('Logout error:', error);
+    } catch (err: any) {
+      console.error('Logout error:', err);
+      setError(err.message);
     }
     
     setUser(null);
@@ -201,6 +217,7 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
         user,
         isAuthenticated: !!user,
         isLoading,
+        error, // Provide error state
         login,
         signup,
         logout,
@@ -213,3 +230,12 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
 }
 
 export default AuthContext;
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+}
+
