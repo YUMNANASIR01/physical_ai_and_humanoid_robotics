@@ -45,23 +45,23 @@
   "/login-f43": {
     "__comp": "__comp---site-src-pages-login-tsx-34-b-c7d",
     "__context": {
-      "plugin": "plugin---markdown-pagea-74-7b5"
+      "plugin": "plugin---logina-74-fc3"
     },
-    "config": "config---signup-5-e-9-5dd"
+    "config": "config---login-5-e-9-d49"
   },
   "/markdown-page-3d7": {
     "__comp": "__comp---theme-mdx-page-1-f-3-b90",
     "__context": {
-      "plugin": "plugin---markdown-pagea-74-7b5"
+      "plugin": "plugin---logina-74-fc3"
     },
     "content": "content---markdown-page-393-028"
   },
   "/signup-312": {
     "__comp": "__comp---site-src-pages-signup-tsx-8-d-9-369",
     "__context": {
-      "plugin": "plugin---markdown-pagea-74-7b5"
+      "plugin": "plugin---logina-74-fc3"
     },
-    "config": "config---signup-5-e-9-5dd"
+    "config": "config---login-5-e-9-d49"
   },
   "/docs-aa1": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
@@ -155,8 +155,8 @@
   "/-e5f": {
     "__comp": "__comp---site-src-pages-index-tsx-1-df-d3e",
     "__context": {
-      "plugin": "plugin---markdown-pagea-74-7b5"
+      "plugin": "plugin---logina-74-fc3"
     },
-    "config": "config---signup-5-e-9-5dd"
+    "config": "config---login-5-e-9-d49"
   }
 }
