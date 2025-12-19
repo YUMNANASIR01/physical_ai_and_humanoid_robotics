@@ -11,6 +11,8 @@ export default function LoginPage() {
         style={{
           display: 'flex',
           justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh',
         }}>
         <AuthForm isLogin />
       </div>
