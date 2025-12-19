@@ -24,10 +24,9 @@ interface ChatPanelProps {
 
 type PanelSize = 'small' | 'medium' | 'large';
 
-// ---------------------------------------
-// -------------------------------------------------------------------------
 // API Configuration
-let API_URL = 'web-production-e1ceb.up.railway.app';
+
+let API_URL = 'https://web-production-94365f.up.railway.app/';
 
 // Agar browser mein 'localhost' likha hai, to Local Backend use karo
 if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
@@ -36,7 +35,6 @@ if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
 
 const API_KEY = 'backend1234';
 // -------------------------------------------------------------------------
-// -----------------------------------------------------
 // Regex to detect redirect commands in response
 const REDIRECT_REGEX = /\[\[REDIRECT:([^\]]+)\]\]/;
 
@@ -87,7 +85,7 @@ export default function ChatPanel({ isOpen, onClose, selectedText }: ChatPanelPr
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [panelSize, setPanelSize] = useState<PanelSize>('medium');
+  const [currentPanelSize, setCurrentPanelSize] = useState<PanelSize>('medium'); // Default to medium
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const routerHistory = useHistory();
@@ -95,9 +93,25 @@ export default function ChatPanel({ isOpen, onClose, selectedText }: ChatPanelPr
   // Get base URL for proper routing
   const baseUrl = useBaseUrl('/');
 
+  // Determine panel size based on screen width
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) { // Example breakpoint for mobile
+        setCurrentPanelSize('small');
+      } else {
+        setCurrentPanelSize('medium');
+      }
+    };
+
+    handleResize(); // Set initial size
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Load messages from session storage on mount
   useEffect(() => {
     if (typeof window === 'undefined') return;
+    
     
     try {
       const savedMessages = sessionStorage.getItem(CHAT_MESSAGES_KEY);
@@ -375,44 +389,22 @@ export default function ChatPanel({ isOpen, onClose, selectedText }: ChatPanelPr
   if (!isOpen) return null;
 
   return (
-    <div className={`${styles.chatPanel} ${styles[panelSize]}`}>
+    <div className={`${styles.chatPanel} ${styles[currentPanelSize]}`}>
       <div className={styles.header}>
         <div className={styles.headerTitle}>
           <FiMessageSquare />
           <span>AI Assistant</span>
         </div>
         <div className={styles.headerControls}>
-          <button 
-            onClick={() => setPanelSize('small')} 
-            className={`${styles.sizeButton} ${panelSize === 'small' ? styles.active : ''}`}
-            title="Small view"
-          >
-            S
-          </button>
-          <button 
-            onClick={() => setPanelSize('medium')} 
-            className={`${styles.sizeButton} ${panelSize === 'medium' ? styles.active : ''}`}
-            title="Medium view"
-          >
-            M
-          </button>
-          <button 
-            onClick={() => setPanelSize('large')} 
-            className={`${styles.sizeButton} ${panelSize === 'large' ? styles.active : ''}`}
-            title="Large view"
-          >
-            L
-          </button>
-          <button 
-            onClick={clearChat} 
-            className={styles.clearButton} 
-            aria-label="Clear chat"
-            title="Clear chat history"
-            disabled={messages.length === 0}
-          >
-            <FiTrash2 size={14} />
-          </button>
-          <button onClick={onClose} className={styles.closeButton} aria-label="Close chat">
+                    <button
+                      onClick={clearChat}
+                      className={styles.clearButton}
+                      aria-label="Clear chat"
+                      title="Clear chat history"
+                      disabled={messages.length === 0}
+                    >
+                      <FiTrash2 size={14} />
+                    </button>          <button onClick={onClose} className={styles.closeButton} aria-label="Close chat">
             <FiX />
           </button>
         </div>

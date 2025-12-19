@@ -3,6 +3,7 @@
   position: fixed;
   bottom: 90px;
   right: 24px;
+  max-height: calc(100vh - 120px);
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -30,6 +31,22 @@
 .small { width: 340px; height: 450px; }
 .medium { width: 420px; height: 600px; }
 .large { width: 650px; height: 700px; }
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .chatPanel {
+    bottom: 90px; /* Adjust as needed for mobile footer */
+    right: 24px;
+    left: 24px;
+    width: calc(100vw - 48px); /* Full width minus padding */
+    max-height: calc(100vh - 120px); /* Adjust for header/footer if present */
+  }
+
+  .small, .medium, .large {
+    width: calc(100vw - 48px);
+    height: calc(100vh - 120px); /* Let it grow vertically */
+  }
+}
 
 .header {
   padding: 16px 20px;
@@ -120,4 +137,236 @@
 .sendButton:hover {
   transform: scale(1.05);
   background: var(--ifm-color-primary-dark);
+}
+
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between clear and close buttons */
+}
+
+.clearButton {
+  background: none;
+  border: none;
+  color: var(--ifm-color-emphasis-500);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.clearButton:hover:not(:disabled) {
+  background-color: var(--ifm-hover-background-color);
+}
+
+.clearButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: var(--ifm-color-emphasis-500);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.closeButton:hover {
+  background-color: var(--ifm-hover-background-color);
+}
+
+.welcomeMessage {
+  text-align: center;
+  padding: 20px;
+  color: var(--ifm-font-color-base);
+}
+
+.welcomeMessage h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: var(--ifm-heading-color);
+}
+
+.welcomeMessage p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.selectedTextBanner {
+  background-color: var(--ifm-color-primary-light);
+  color: var(--ifm-color-primary-dark);
+  padding: 8px 20px;
+  font-size: 0.85rem;
+  border-bottom: 1px solid var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .selectedTextBanner {
+  background-color: var(--ifm-color-primary-dark);
+  color: var(--ifm-color-primary-lighter);
+}
+
+.message a {
+  color: var(--ifm-color-primary);
+  text-decoration: underline;
+}
+
+.error {
+  background-color: var(--ifm-color-danger-light);
+  color: var(--ifm-color-danger-dark);
+  padding: 12px;
+  border-radius: 8px;
+  margin: 10px 20px;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+[data-theme='dark'] .error {
+  background-color: var(--ifm-color-danger-dark);
+  color: var(--ifm-color-danger-lighter);
+}
+
+.errorButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.errorButtons button {
+  background-color: var(--ifm-color-danger);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.2s;
+}
+
+.errorButtons button:hover {
+  background-color: var(--ifm-color-danger-dark);
+}
+
+.redirectIndicator {
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  color: var(--ifm-font-color-secondary);
+}
+
+.redirectIndicator.navigating {
+  background-color: var(--ifm-color-warning-lighter);
+  border-color: var(--ifm-color-warning);
+  color: var(--ifm-color-warning-darkest);
+}
+
+.redirectIcon {
+  font-size: 1.1em;
+}
+
+.redirectSpinner {
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  font-size: 1.1em;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Specific styling for assistant messages that contain a redirect */
+.assistant.redirectMessage {
+  border: 1px solid var(--ifm-color-primary-light); /* Highlight redirect messages */
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
+}
+
+/* Markdown styling within messages */
+.message .token.tag {
+  color: #3182CE; /* blue-600 */
+}
+.message .token.punctuation {
+  color: #3182CE; /* blue-600 */
+}
+.message .token.attr-name {
+  color: #D69E2E; /* yellow-600 */
+}
+.message .token.attr-value {
+  color: #8258dc; /* purple-600 */
+}
+.message .token.string {
+  color: #38A169; /* green-600 */
+}
+.message .token.keyword {
+  color: #DD6B20; /* orange-600 */
+}
+.message pre {
+  background-color: var(--ifm-background-color);
+  padding: 10px;
+  border-radius: 8px;
+  overflow-x: auto;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  margin-top: 10px;
+}
+.message code {
+  background-color: var(--ifm-background-color);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+  font-size: 0.9em;
+}
+.message pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+.message blockquote {
+  border-left: 4px solid var(--ifm-color-primary);
+  padding-left: 15px;
+  margin-left: 0;
+  color: var(--ifm-font-color-secondary);
+}
+.message ul, .message ol {
+  margin-left: 20px;
+  padding-left: 0;
+}
+.message li {
+  margin-bottom: 5px;
+}
+.message h1, .message h2, .message h3, .message h4, .message h5, .message h6 {
+  color: var(--ifm-heading-color);
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+.message table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+.message th, .message td {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  padding: 8px;
+  text-align: left;
+}
+.message th {
+  background-color: var(--ifm-background-surface-color);
+  font-weight: 600;
 }
