@@ -1,5 +1,6 @@
 // src\theme\DocItem\Layout\index.tsx
 import React, { useState, useCallback, useEffect } from 'react';
+import { JSX } from 'react';
 import DocItemLayout from '@theme-original/DocItem/Layout';
 import TranslationControl, { clearSharedOriginalContent } from '../TranslationControl';
 import Personalizer from '../Personalizer';

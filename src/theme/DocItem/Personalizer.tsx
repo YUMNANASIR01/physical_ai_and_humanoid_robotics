@@ -1,5 +1,6 @@
 // src\theme\DocItem\Personalizer.tsx
 import React, { useState, useContext, useCallback } from 'react';
+import { JSX } from 'react';
 import useIsBrowser from '@docusaurus/useIsBrowser';
 import { AuthContext } from '@site/src/components/AuthContext';
 import { getSharedOriginalContent, setSharedOriginalContent } from './TranslationControl';

@@ -1,5 +1,6 @@
 // src\theme\Navbar\UserProfileButton.tsx
 import React, { useState, useContext, useRef, useEffect } from 'react';
+import { JSX } from 'react';
 import { useColorMode } from '@docusaurus/theme-common';
 import { AuthContext } from '@site/src/components/AuthContext';
 import styles from './UserProfileButton.module.css';

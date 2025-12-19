@@ -1,5 +1,6 @@
-// src\components\ContentHighlight\ContentHighlight.tsx
+// src/components/ContentHighlight/ContentHighlight.tsx
 import React, { useEffect, useState, useCallback } from 'react';
+import { JSX } from 'react';
 import { useLocation } from '@docusaurus/router';
 import useIsBrowser from '@docusaurus/useIsBrowser';
 import styles from './ContentHighlight.module.css';

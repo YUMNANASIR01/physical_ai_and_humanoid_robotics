@@ -1,5 +1,6 @@
 // src\theme\Layout\AiChatButton.tsx
 import React from 'react';
+import { JSX } from 'react';
 
 export default function AiChatButton(): JSX.Element {
   return (

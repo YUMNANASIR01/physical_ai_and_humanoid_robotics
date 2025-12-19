@@ -1,5 +1,6 @@
 // src\theme\DocItem\TranslationControl.tsx
 import React, { useState, useContext, useRef, useCallback } from 'react';
+import { JSX } from 'react';
 import useIsBrowser from '@docusaurus/useIsBrowser';
 import { AuthContext } from '@site/src/components/AuthContext';
 import styles from './ContentControls.module.css';

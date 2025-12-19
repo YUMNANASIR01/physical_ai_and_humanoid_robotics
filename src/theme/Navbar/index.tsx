@@ -1,5 +1,6 @@
 // src\theme\Navbar\index.tsx
 import React from 'react';
+import { JSX } from 'react';
 import NavbarLayout from '@theme/Navbar/Layout';
 import NavbarContent from '@theme/Navbar/Content';
 import UserProfileButton from './UserProfileButton';

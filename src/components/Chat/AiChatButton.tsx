@@ -1,5 +1,6 @@
 // src/components/Chat/AiChatButton.tsx
 import React, { useState, useEffect } from 'react';
+import { JSX } from 'react';
 import useIsBrowser from '@docusaurus/useIsBrowser';
 import ChatPanel from './ChatPanel';
 import styles from './AiChatButton.module.css';

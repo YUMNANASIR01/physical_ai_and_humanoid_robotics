@@ -149,6 +149,12 @@
 }
 
 /* Responsive Styles */
+@media (min-width: 1200px) {
+  .card {
+    max-width: 550px;
+  }
+}
+
 @media (max-width: 768px) {
   .wrapper {
     padding: 20px 10px;
@@ -207,5 +213,29 @@
   }
   .error, .switch {
     font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .wrapper {
+    padding: 10px 5px;
+  }
+  .card {
+    padding: 15px;
+  }
+  .title {
+    font-size: 1.3rem;
+  }
+  .card input,
+  .card select,
+  .card button {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+  .checkboxGroup label {
+    font-size: 0.8rem;
+  }
+  .error, .switch {
+    font-size: 0.8rem;
   }
 }

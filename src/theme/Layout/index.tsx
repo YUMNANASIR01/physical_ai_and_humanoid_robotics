@@ -1,5 +1,6 @@
 // src\theme\Layout\index.tsx
 import React from 'react';
+import { JSX } from 'react';
 import Layout from '@theme-original/Layout';
 import { AiChatButton } from '@site/src/components/Chat';
 import { AuthProvider } from '@site/src/components/AuthContext';
