@@ -3,9 +3,9 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import AuthForm from '@site/src/components/AuthForm';
 
-export default function SignUpPage() {
+export default function LoginPage() {
   return (
-    <Layout title="Sign Up" description="Sign up for an account">
+    <Layout title="Login" description="Login to your account">
       <div
         style={{
           display: 'flex',
@@ -13,9 +13,8 @@ export default function SignUpPage() {
           alignItems: 'center',
           height: '50vh',
         }}>
-        <AuthForm />
+        <AuthForm isLogin />
       </div>
     </Layout>
   );
 }
-

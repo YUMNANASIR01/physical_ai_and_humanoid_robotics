@@ -102,6 +102,64 @@
   text-decoration: underline;
 }
 
+.error {
+  color: #d84a4a; /* A strong red for error messages */
+  background-color: #ffebeb; /* Light red background */
+  border: 1px solid #d84a4a;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.inputGroup select {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background-color: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none; /* Remove default browser select styles */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-6.5%200-12.3%203.2-16.1%208.1-3.9%204.9-4.3%2011.6-1.1%2017.4l139.5%20182c1.7%202.6%204.9%204.2%208.4%204.2%203.5%200%206.7-1.6%208.4-4.2l139.5-182c3.2-5.8%202.8-12.5-1.1-17.4z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+
+.inputGroup select:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--ifm-color-primary-rgb), 0.15);
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1rem;
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+}
+
+.checkboxLabel input[type="checkbox"] {
+  width: auto; /* Override 100% width from inputGroup input */
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  transform: scale(1.2); /* Make checkbox slightly larger */
+}
+
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .signUpContainer {
@@ -113,7 +171,8 @@
   .signUpForm h2 {
     font-size: 1.75rem;
   }
-  .inputGroup input {
+  .inputGroup input,
+  .inputGroup select { /* Apply responsive styles to select as well */
     padding: 12px;
   }
   .submitButton {

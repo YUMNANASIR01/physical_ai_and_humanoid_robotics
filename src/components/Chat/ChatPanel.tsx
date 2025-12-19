@@ -26,7 +26,7 @@ type PanelSize = 'small' | 'medium' | 'large';
 
 // API Configuration
 
-let API_URL = 'https://web-production-94365f.up.railway.app/';
+let API_URL = 'https://web-production-94365f.up.railway.app';
 
 // Agar browser mein 'localhost' likha hai, to Local Backend use karo
 if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
@@ -69,9 +69,11 @@ async function fetchWithTimeout(
     
     if (err instanceof Error) {
       if (err.name === 'AbortError') {
+        console.error('Fetch timeout error details:', err);
         throw new Error('Request timed out. Please check your connection and try again.');
       }
       if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
+        console.error('Fetch network error details:', err);
         throw new Error('Network error. Please check your internet connection.');
       }
     }
@@ -85,7 +87,7 @@ export default function ChatPanel({ isOpen, onClose, selectedText }: ChatPanelPr
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [currentPanelSize, setCurrentPanelSize] = useState<PanelSize>('medium'); // Default to medium
+  const panelSize: PanelSize = 'medium';
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const routerHistory = useHistory();
@@ -93,25 +95,9 @@ export default function ChatPanel({ isOpen, onClose, selectedText }: ChatPanelPr
   // Get base URL for proper routing
   const baseUrl = useBaseUrl('/');
 
-  // Determine panel size based on screen width
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) { // Example breakpoint for mobile
-        setCurrentPanelSize('small');
-      } else {
-        setCurrentPanelSize('medium');
-      }
-    };
-
-    handleResize(); // Set initial size
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   // Load messages from session storage on mount
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
     
     try {
       const savedMessages = sessionStorage.getItem(CHAT_MESSAGES_KEY);
@@ -389,7 +375,7 @@ export default function ChatPanel({ isOpen, onClose, selectedText }: ChatPanelPr
   if (!isOpen) return null;
 
   return (
-    <div className={`${styles.chatPanel} ${styles[currentPanelSize]}`}>
+    <div className={`${styles.chatPanel} ${styles[panelSize]}`}>
       <div className={styles.header}>
         <div className={styles.headerTitle}>
           <FiMessageSquare />
