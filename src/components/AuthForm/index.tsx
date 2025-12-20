@@ -122,44 +122,52 @@ export default function AuthForm({ isLogin }: AuthFormProps) {
                 required
               />
 
-              <select id="programmingExperience" onChange={handleChange} required>
-                <option value="">Programming Experience</option>
-                {programmingExperienceOptions.map((opt) => (
-                  <option key={opt}>{opt}</option>
-                ))}
-              </select>
+              <div className={styles.formRow}>
+                <select id="programmingExperience" onChange={handleChange} required>
+                  <option value="">Programming Experience</option>
+                  {programmingExperienceOptions.map((opt) => (
+                    <option key={opt}>{opt}</option>
+                  ))}
+                </select>
 
-              <select id="roboticsExperience" onChange={handleChange} required>
-                <option value="">Robotics Experience</option>
-                {roboticsExperienceOptions.map((opt) => (
-                  <option key={opt}>{opt}</option>
-                ))}
-              </select>
-
-              <div className={styles.checkboxGroup}>
-                {programmingLanguageOptions.map((lang) => (
-                  <label key={lang}>
-                    <input
-                      type="checkbox"
-                      checked={form.programmingLanguages.includes(lang)}
-                      onChange={() => toggleArrayValue('programmingLanguages', lang)}
-                    />
-                    {lang}
-                  </label>
-                ))}
+                <select id="roboticsExperience" onChange={handleChange} required>
+                  <option value="">Robotics Experience</option>
+                  {roboticsExperienceOptions.map((opt) => (
+                    <option key={opt}>{opt}</option>
+                  ))}
+                </select>
               </div>
 
-              <div className={styles.checkboxGroup}>
-                {hardwareAccessOptions.map((hw) => (
-                  <label key={hw}>
-                    <input
-                      type="checkbox"
-                      checked={form.hardwareAccess.includes(hw)}
-                      onChange={() => toggleArrayValue('hardwareAccess', hw)}
-                    />
-                    {hw}
-                  </label>
-                ))}
+              <div className={styles.formSection}>
+                <label className={styles.sectionLabel}>Programming Languages</label>
+                <div className={styles.checkboxGroup}>
+                  {programmingLanguageOptions.map((lang) => (
+                    <label key={lang} className={styles.checkboxLabel}>
+                      <input
+                        type="checkbox"
+                        checked={form.programmingLanguages.includes(lang)}
+                        onChange={() => toggleArrayValue('programmingLanguages', lang)}
+                      />
+                      <span className={styles.checkboxText}>{lang}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.formSection}>
+                <label className={styles.sectionLabel}>Hardware Access</label>
+                <div className={styles.checkboxGroup}>
+                  {hardwareAccessOptions.map((hw) => (
+                    <label key={hw} className={styles.checkboxLabel}>
+                      <input
+                        type="checkbox"
+                        checked={form.hardwareAccess.includes(hw)}
+                        onChange={() => toggleArrayValue('hardwareAccess', hw)}
+                      />
+                      <span className={styles.checkboxText}>{hw}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
             </>
           )}

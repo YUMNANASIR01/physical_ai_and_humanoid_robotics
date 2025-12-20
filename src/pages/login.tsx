@@ -7,13 +7,7 @@ import '@site/src/components/AuthForm/styles.module.css';
 export default function LoginPage() {
   return (
     <Layout title="Login" description="Login to your account">
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100vh',
-        }}>
+      <div style={{ minHeight: '70vh', padding: '20px 0' }}>
         <AuthForm isLogin />
       </div>
     </Layout>
