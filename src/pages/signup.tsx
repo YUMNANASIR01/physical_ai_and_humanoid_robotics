@@ -7,9 +7,16 @@ import '@site/src/components/AuthForm/styles.module.css';
 export default function SignUpPage() {
   return (
     <Layout title="Sign Up" description="Sign up for an account">
-      <div style={{ minHeight: '70vh', padding: '20px 0' }}>
+      <main style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        minHeight: '80vh',
+        paddingTop: '4rem',
+        paddingBottom: '2rem'
+      }}>
         <AuthForm />
-      </div>
+      </main>
     </Layout>
   );
 }

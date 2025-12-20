@@ -4,8 +4,8 @@
   z-index: 10;
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 70vh; /* Reduced height to prevent overflow issues */
+  align-items: flex-start; /* Changed from center to flex-start to align to top */
+  min-height: 80vh; /* Increased height to ensure proper vertical spacing */
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
@@ -14,7 +14,7 @@
 .card {
   width: 100%;
   max-width: 520px;
-  background:
+  background: 
     radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 20%),
     radial-gradient(circle at 90% 80%, rgba(0, 0, 0, 0.1) 0%, transparent 20%),
     linear-gradient(145deg, rgba(25, 25, 35, 0.8), rgba(15, 15, 25, 0.9)); /* Modern gradient background */
@@ -23,13 +23,15 @@
   padding: 40px;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow:
+  box-shadow: 
     0 25px 50px -12px rgba(0, 0, 0, 0.5),
     inset 0 0 15px rgba(255, 255, 255, 0.05);
   box-sizing: border-box;
   color: var(--ifm-font-color-base);
   position: relative;
   overflow: hidden;
+  margin-top: 2rem; /* Add top margin for better positioning */
+  margin-bottom: 2rem; /* Add bottom margin for better positioning */
 }
 
 /* Decorative elements for premium look */
@@ -92,7 +94,7 @@
   font-size: 1.1rem;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
-  background:
+  background: 
     linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.1)),
     rgba(25, 25, 35, 0.8);
   color: var(--ifm-font-color-base);
@@ -114,20 +116,20 @@
 .card select:focus {
   outline: none;
   border-color: var(--ai-accent-blue);
-  box-shadow:
+  box-shadow: 
     0 0 0 2px rgba(0, 188, 212, 0.2),
     0 0 20px rgba(0, 188, 212, 0.3);
-  background:
+  background: 
     linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(25, 25, 35, 0.6)),
     rgba(25, 25, 35, 0.8);
   transform: translateY(-2px);
 }
 
 .card select {
-  background-image:
+  background-image: 
     linear-gradient(45deg, transparent 50%, rgba(255, 255, 255, 0.5) 50%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.5) 50%, transparent 50%);
-  background-position:
+  background-position: 
     calc(100% - 25px) calc(1em + 4px),
     calc(100% - 20px) calc(1em + 4px);
   background-size: 5px 5px, 5px 5px;
@@ -153,7 +155,7 @@
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-sizing: border-box;
-  box-shadow:
+  box-shadow: 
     0 10px 25px -5px rgba(0, 188, 212, 0.4),
     0 8px 10px -6px rgba(156, 39, 176, 0.5);
   position: relative;
@@ -181,7 +183,7 @@
 .card button:hover:not(:disabled) {
   background: linear-gradient(135deg, var(--ai-accent-purple) 0%, var(--ai-accent-blue) 100%);
   transform: translateY(-3px) scale(1.02);
-  box-shadow:
+  box-shadow: 
     0 20px 30px -8px rgba(0, 188, 212, 0.5),
     0 12px 15px -8px rgba(156, 39, 176, 0.6);
 }
@@ -198,7 +200,7 @@
 }
 
 .error {
-  background:
+  background: 
     linear-gradient(145deg, rgba(255, 107, 107, 0.1), rgba(179, 27, 27, 0.15)),
     rgba(25, 25, 35, 0.8);
   border: 1px solid rgba(255, 107, 107, 0.4);
@@ -393,6 +395,10 @@
     padding: 14px 18px;
     font-size: 1rem;
     border-radius: 10px;
+  }
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
   .checkboxGroup {
     grid-template-columns: repeat(2, 1fr);
