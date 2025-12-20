@@ -10,9 +10,9 @@ export default function SignUpPage() {
       <main style={{
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'center', /* Changed back to center for vertical alignment */
         minHeight: '80vh',
-        paddingTop: '4rem',
+        paddingTop: '2rem',
         paddingBottom: '2rem'
       }}>
         <AuthForm />
